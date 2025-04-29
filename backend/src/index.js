@@ -1,5 +1,7 @@
 import express, { urlencoded } from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+
 import authRoutes from "./routes/auth.routes.js";
 
 dotenv.config();
@@ -7,6 +9,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 const port = process.env.PORT || 8040;
 
