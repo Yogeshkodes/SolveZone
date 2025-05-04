@@ -1,5 +1,5 @@
 import bcrypt, { hash } from "bcryptjs";
-import { db } from "../../libs/db.js";
+import { db } from "../libs/db.js";
 import { Router } from "express";
 import { UserRole } from "../generated/prisma/index.js";
 import jwt from "jsonwebtoken";
