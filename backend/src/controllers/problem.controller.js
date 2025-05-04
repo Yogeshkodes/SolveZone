@@ -90,10 +90,56 @@ export const createProblem = async (req, res) => {
 };
 
 export const getAllProblems = async (req, res) => {
-  
+  try {
+    const problem = await db.problem.findMany();
+
+    if (!problem)
+      return res.status(404).json({
+        sucess: false,
+        error: "No problem Found",
+      });
+
+    res.status(200).json({
+      sucess: true,
+      message: "Problems Fetched Succesfully",
+      problem,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      error: "Error while fetching Problems",
+    });
+  }
 };
 
-export const getProblemById = async (req, res) => {};
+export const getProblemById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const problem = await db.problem.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!problem)
+      return res.status(404).json({
+        sucess: false,
+        error: "No problem Found",
+      });
+
+    res.status(200).json({
+      sucess: true,
+      message: "Problem Fetched Succesfully",
+      problem,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      error: "Error while fetching Problem",
+    });
+  }
+};
 
 export const updateProblem = async (req, res) => {};
 
